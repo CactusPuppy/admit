@@ -41,6 +41,13 @@
             <version>1.18.4</version>
             <type>jar</type>
         </dependency>
+        <!--MockBukkit-->
+        <dependency>
+            <groupId>com.github.seeseemelk</groupId>
+            <artifactId>MockBukkit-v1.13-spigot</artifactId>
+            <version>0.2.0</version>
+            <scope>test</scope>
+        </dependency>
         <!--Mockito-->
         <dependency>
             <groupId>org.mockito</groupId>
