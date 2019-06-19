@@ -67,6 +67,12 @@
             <version>16.0.1</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.6</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -85,8 +91,6 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.0</version>
                 <configuration>
-                    <release>8</release>
-                    <compilerArgs>--enable-preview</compilerArgs>
                     <encoding>UTF-8</encoding>
                     <source>8</source>
                     <target>8</target>
