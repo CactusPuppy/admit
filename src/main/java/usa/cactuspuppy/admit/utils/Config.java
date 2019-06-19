@@ -1,6 +1,7 @@
 package usa.cactuspuppy.admit.utils;
 
 import lombok.Getter;
+import lombok.Setter;
 import org.apache.commons.lang.StringUtils;
 import usa.cactuspuppy.admit.Main;
 
@@ -15,6 +16,12 @@ import java.util.regex.Pattern;
  * @author CactusPuppy
  */
 public final class Config {
+    @Getter @Setter
+    /**
+     * How many spaces each level should indent
+     */
+    private static int spacesPerIndent = 2;
+
     @Getter
     private File configFile;
     /**
@@ -63,6 +70,14 @@ public final class Config {
             readValues(new FileInputStream(configFile));
         } catch (FileNotFoundException e) {
             Logger.logWarning(this.getClass(), "Could not find config file " + configFile.getName() + " on config construction", e);
+        }
+    }
+
+    public void reload() {
+        try {
+            readValues(new FileInputStream(configFile));
+        } catch (FileNotFoundException e) {
+            Logger.logWarning(this.getClass(), "Problem reloading from disk", e);
         }
     }
 
@@ -174,7 +189,8 @@ public final class Config {
             }
             writer.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            Logger.logWarning(this.getClass(), "Problem saving config file " + configFile.getName(), e);
+            return false;
         }
         return true;
     }
@@ -206,8 +222,12 @@ public final class Config {
         return new HashMap<>(nonKeyLocs);
     }
 
-    public void set(String key, String value) {
+    public boolean set(String key, String value) {
+        if (!values.containsKey(key)) {
+            return false;
+        }
         values.put(key, value);
+        return true;
     }
 
     @Override

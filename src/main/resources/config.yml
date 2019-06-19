@@ -1,10 +1,10 @@
 # Bypass Mode:
-# no-count = Players with the admit.bypass permission
+# no_count = Players with the admit.bypass permission
 #            will not count towards the player limit
 #
 # override = Players with the admit.bypass permission will
 #            join the server, regardless of player limit
-bypass-mode: no-count
+bypass-mode: no_count
 
 # Spooky stuff (Do Not Touch)
 config-version: 0.1
