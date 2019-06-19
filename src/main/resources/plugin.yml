@@ -1,0 +1,18 @@
+main: usa.cactuspuppy.admit.Main
+name: Admit
+version: 0.1.0
+description: Adds a permission which allows the holder to bypass the player limit or not count towards it.
+api-version: '1.14'
+load: POSTWORLD
+author: CactusPuppy
+website: www.crashtc.com
+prefix: Admit
+permissions:
+  admit.bypass:
+    description: Marks the holder as a bypasser
+    default: op
+  admit.*:
+    description: Wildcard permission
+    default: op
+    children:
+      admit.bypass: true
