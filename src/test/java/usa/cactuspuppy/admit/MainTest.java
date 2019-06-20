@@ -17,10 +17,6 @@ import java.net.InetAddress;
 
 import static org.junit.Assert.*;
 
-@RunWith(PowerMockRunner.class)
-@PrepareForTest({
-        Bukkit.class
-})
 public class MainTest {
     private static Player bypasser;
     private static Player pleb;
@@ -31,7 +27,6 @@ public class MainTest {
 
     @BeforeClass
     public static void setupClass() {
-        PowerMockito.mockStatic(Bukkit.class);
         bypasser = Mockito.mock(Player.class);
         pleb = Mockito.mock(Player.class);
 

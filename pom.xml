@@ -6,7 +6,7 @@
 
     <groupId>usa.cactuspuppy.admit</groupId>
     <artifactId>Admit</artifactId>
-    <version>0.2.3-SNAPSHOT</version>
+    <version>0.2.4-SNAPSHOT</version>
 
     <properties>
         <powermock.version>2.0.0</powermock.version>

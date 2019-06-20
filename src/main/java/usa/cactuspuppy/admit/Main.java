@@ -63,15 +63,13 @@ public class Main extends JavaPlugin implements Listener {
             command.setExecutor(handler);
             command.setTabCompleter(handler);
         }
-        if (bypassEnabled) {
-            try {
-                Bukkit.getPluginManager().registerEvents(this, this);
-            } catch (NullPointerException e) {
-                Logger.logWarning(this.getClass(), "Unable to register login listener!");
-            }
+        try {
+            Bukkit.getPluginManager().registerEvents(this, this);
+        } catch (NullPointerException e) {
+            Logger.logWarning(this.getClass(), "Unable to register login listener!");
         }
         long elapsedNanos = System.nanoTime() - start;
-        Logger.logInfo(this.getClass(), ChatColor.AQUA + "Admit" + ChatColor.GREEN + " startup complete!\n");
+        Logger.logInfo(this.getClass(), ChatColor.AQUA + "Admit" + ChatColor.GREEN + " startup complete!");
         Logger.logInfo(this.getClass(), String.format(
                 ChatColor.LIGHT_PURPLE + "Time Elapsed: " + ChatColor.GOLD + "%1$.2fms (%2$dns)",
                 elapsedNanos / 10e6, elapsedNanos));
@@ -120,6 +118,9 @@ public class Main extends JavaPlugin implements Listener {
      */
     private boolean processConfig() {
         try {
+            if (!mainConfig.contains("enabled")) {
+
+            }
             String value = mainConfig.get("enabled");
             if (value.equalsIgnoreCase("true")) {
                 bypassEnabled = true;
