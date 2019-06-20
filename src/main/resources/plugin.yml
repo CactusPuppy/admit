@@ -1,18 +1,31 @@
 main: usa.cactuspuppy.admit.Main
 name: Admit
-version: 0.1.0
+version: 0.2.2
 description: Adds a permission which allows the holder to bypass the player limit or not count towards it.
 api-version: '1.14'
 load: POSTWORLD
 author: CactusPuppy
 website: www.crashtc.com
 prefix: Admit
+commands:
+  admit:
+    description: Manages the Admit plugin
+    aliases:
+      - bypass
+      - ad
+    permission: admit.admin
+    permission-message: You do not have access to this command! seagBAN
+    usage: /admit <mode|on|off> [args]
 permissions:
   admit.bypass:
     description: Marks the holder as a bypasser
+    default: op
+  admit.admin:
+    description: Grants access to the /admit command
     default: op
   admit.*:
     description: Wildcard permission
     default: op
     children:
       admit.bypass: true
+      admit.admin: true
