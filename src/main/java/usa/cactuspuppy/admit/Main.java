@@ -2,6 +2,7 @@ package usa.cactuspuppy.admit;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.commons.io.FileUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -17,6 +18,9 @@ import usa.cactuspuppy.admit.utils.Config;
 import usa.cactuspuppy.admit.utils.Logger;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Objects;
 
 public class Main extends JavaPlugin implements Listener {
@@ -34,6 +38,10 @@ public class Main extends JavaPlugin implements Listener {
         long start = System.nanoTime();
         instance = this;
         Logger.setOutput(this.getLogger());
+        if (!createConfig()) {
+            abortSetup();
+            return;
+        }
         mainConfig = new Config();
         if (mainConfig.getInitCode() != 0) {
             abortSetup();
@@ -43,7 +51,11 @@ public class Main extends JavaPlugin implements Listener {
             abortSetup();
             return;
         }
-        Bukkit.getPluginManager().registerEvents(this, this);
+        try {
+            Bukkit.getPluginManager().registerEvents(this, this);
+        } catch (NullPointerException e) {
+            Logger.logWarning(this.getClass(), "Unable to register login listener!");
+        }
         long elapsedNanos = System.nanoTime() - start;
         Logger.logInfo(this.getClass(), String.format(ChatColor.AQUA + "Admit" + ChatColor.GREEN + " startup complete!\n"
                 + ChatColor.LIGHT_PURPLE + "Time Elapsed: " + ChatColor.GOLD + "%1$.2fms (%2$dns)",
@@ -53,6 +65,36 @@ public class Main extends JavaPlugin implements Listener {
     private void abortSetup() {
         Logger.logSevere(this.getClass(), "Critical error on plugin startup, disabling...");
         Bukkit.getPluginManager().disablePlugin(this);
+    }
+
+    @Override
+    public void saveDefaultConfig() {
+        //Do nothing, this breaks custom config setup
+    }
+
+    private boolean createConfig() {
+        //Get/create main config
+        File dataFolder = Main.getInstance().getDataFolder();
+        if (!dataFolder.isDirectory() && !dataFolder.mkdirs()) {
+            Logger.logSevere(this.getClass(), "Could not find or create data folder.");
+            return false;
+        }
+        File config = new File(Main.getInstance().getDataFolder(), "config.yml");
+        //Create config if not exist
+        if (!config.isFile()) {
+            InputStream inputStream = getResource("config.yml");
+            if (inputStream == null) {
+                Logger.logSevere(this.getClass(), "No packaged config.yml?!");
+                return false;
+            }
+            try {
+                FileUtils.copyToFile(inputStream, config);
+            } catch (IOException e) {
+                Logger.logSevere(this.getClass(), "Error while creating new config", e);
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
@@ -86,6 +128,10 @@ public class Main extends JavaPlugin implements Listener {
         if (event.getResult() != PlayerLoginEvent.Result.KICK_FULL) {
             return;
         }
+        if (event.getPlayer().hasPermission("admit.bypass")) {
+            event.setResult(PlayerLoginEvent.Result.ALLOWED);
+            return;
+        }
         switch (bypassMode) {
             case NO_COUNT:
                 long onlinePlayers = Bukkit.getOnlinePlayers().size();
@@ -96,10 +142,7 @@ public class Main extends JavaPlugin implements Listener {
                 }
                 break;
             case OVERRIDE:
-                if (event.getPlayer().hasPermission("admit.bypass")) {
-                    event.setResult(PlayerLoginEvent.Result.ALLOWED);
-                }
-                break;
+            default:
         }
     }
 
