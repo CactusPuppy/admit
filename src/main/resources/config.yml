@@ -5,6 +5,7 @@
 # override = Players with the admit.bypass permission will
 #            join the server, regardless of player limit
 bypass-mode: no_count
+enabled: true
 
 # Spooky stuff (Do Not Touch)
-config-version: 0.1
+config-version: 0.2.3
