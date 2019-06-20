@@ -25,8 +25,8 @@ public class MainTest {
     private static Player bypasser;
     private static Player pleb;
     private static InetAddress mockAddress = Mockito.mock(InetAddress.class);
-    private ServerMock server;
-    private Main main;
+    private static ServerMock server;
+    private static Main main;
 
 
     @BeforeClass
@@ -43,17 +43,11 @@ public class MainTest {
     public void setup() {
         server = MockBukkit.mock();
         main = MockBukkit.load(Main.class);
-        server.addSimpleWorld("world");
     }
 
     @After
     public void tearDown() {
         MockBukkit.unload();
-    }
-
-    @Test
-    public void bufferTest() {
-        //Included because MockBukkit doesn't behave on first run for some reason
     }
 
     @Test
@@ -276,7 +270,7 @@ public class MainTest {
     }
 
     @Ignore
-    public class PermissiblePlayerMock extends PlayerMock {
+    public static class PermissiblePlayerMock extends PlayerMock {
         private boolean isBypasser;
 
         public PermissiblePlayerMock(ServerMock server, String name, boolean isBypasser) {
