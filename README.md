@@ -1,6 +1,10 @@
 # admit
 A simple Spigot Plugin that adds a permission that grants administrators the ability to bypass the player limit.
 
+# Permissions
+- `admit.bypass`: Allows holder to bypass player limit
+- `admit.admin`: Allows access to the `/admit` command
+
 # Bypassing
 This plugin adds a permission `admit.bypass` which tags all holders as being able to bypass the player limit in one of two ways:
 - `NO_COUNT`: Players with the `admit.bypass` permission will not count toward the player total
