@@ -1,6 +1,6 @@
 main: usa.cactuspuppy.admit.Main
 name: Admit
-version: 0.2.2
+version: 0.2.4
 description: Adds a permission which allows the holder to bypass the player limit or not count towards it.
 api-version: '1.14'
 load: POSTWORLD
