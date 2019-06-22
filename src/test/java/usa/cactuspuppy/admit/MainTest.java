@@ -3,24 +3,15 @@ package usa.cactuspuppy.admit;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.junit.*;
-import org.junit.runner.RunWith;
 import org.mockito.Mockito;
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
 
 import java.net.InetAddress;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-@RunWith(PowerMockRunner.class)
-@PrepareForTest({
-        Bukkit.class
-})
 public class MainTest {
     private static Player bypasser;
     private static Player pleb;
@@ -31,7 +22,6 @@ public class MainTest {
 
     @BeforeClass
     public static void setupClass() {
-        PowerMockito.mockStatic(Bukkit.class);
         bypasser = Mockito.mock(Player.class);
         pleb = Mockito.mock(Player.class);
 
