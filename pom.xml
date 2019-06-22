@@ -6,7 +6,7 @@
 
     <groupId>usa.cactuspuppy.admit</groupId>
     <artifactId>Admit</artifactId>
-    <version>0.2.3-SNAPSHOT</version>
+    <version>0.2.4-SNAPSHOT</version>
 
     <properties>
         <powermock.version>2.0.0</powermock.version>
@@ -73,18 +73,6 @@
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations</artifactId>
             <version>16.0.1</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>2.6</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>usa.cactuspuppy.mockbukkit</groupId>
-            <artifactId>MockBukkit</artifactId>
-            <version>0.2.2-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
