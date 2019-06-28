@@ -1,6 +1,6 @@
 main: usa.cactuspuppy.admit.Main
 name: Admit
-version: 0.2.4
+version: 1.0.0
 description: Adds a permission which allows the holder to bypass the player limit or not count towards it.
 api-version: '1.14'
 load: POSTWORLD
@@ -15,7 +15,7 @@ commands:
       - ad
     permission: admit.admin
     permission-message: You do not have access to this command! seagBAN
-    usage: /admit <mode|on|off> [args]
+    usage: /admit <mode|on|off|reload> [args]
 permissions:
   admit.bypass:
     description: Marks the holder as a bypasser
